@@ -9,11 +9,18 @@ jobs:
     name: HTML check
     runs-on: ubuntu-latest
     steps:
+      # Checkout the repository to the GitHub Actions runner
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
       - name: Install tidy
-        run: sudo apt install tidy
+        run: sudo apt install tidy -y
 
       - name: Run tidy
-        run: tidy src/index.html
+        run: tidy ./src/index.html > output.html
+      
+      - name: Print generated page
+        run: cat output.html
 
 
   upload:
