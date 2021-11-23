@@ -19,8 +19,12 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "s3Bucket" {
-    bucket = "s3web-githubaction"
-    acl    = "public-read"
+    bucket        = "s3web-githubaction"
+    acl           = "public-read"
+    force_destroy = true
+    lifecycle {
+      prevent_destroy = false
+    }
 
     policy = file("bucketpolicy.json")
     
